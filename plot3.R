@@ -47,10 +47,10 @@ totalEmissionofBCByType <- BaltimoreCity %>% select (year, type, Emissions) %>%
                             summarise_all(funs(sum))
 
 # Constructing the plot
-plot<-qplot(year, Emissions, data = totalEmissionofBCByType, color = type, geom = "line") + 
-    ggtitle(expression("Baltimore City" ~ PM[2.5] ~ "Emissions by Source Type and Year")) +
-    xlab("Year") +
-    ylab(expression("Total" ~ PM[2.5] ~ "Emissions (tons)"))
+plot<-ggplot(totalEmissionofBCByType,aes(x=year, y=Emissions,color=type)) +
+    geom_line() + 
+    labs(title=expression("Baltimore City" ~ PM[2.5] ~ "Emissions by Source Type and Year"), 
+        x = "Year", y= expression("Total" ~ PM[2.5] ~ "Emissions (tons)"))
 
 # Save plot3 as png file
 print(plot)
